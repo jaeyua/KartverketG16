@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using KartverketG16.Models.AccountEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace KartverketG16.Data
 {
@@ -6,7 +7,8 @@ namespace KartverketG16.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-
         }
+
+        public DbSet<AdminEntity> AdminEntity { get; set; }
     }
 }
