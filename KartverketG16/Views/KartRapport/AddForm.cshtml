@@ -1,0 +1,66 @@
+﻿@using KartverketG16.Models.ViewModels
+@model AddMapReportRequest
+
+<div class="container py-3" style="margin-top: -15px;">
+    <div class="container py-4">
+        <div class="row">
+            <!-- Left Column with Title and Form -->
+            <div class="col-md-4">
+                <!-- Title centered in the form container -->
+                <h3 id="form-title-preview" class="text-center mb-4">Ny innmelding</h3>
+
+                <form asp-action="AddForm" enctype="multipart/form-data" method="post" class="shadow p-4 rounded bg-light form-height">
+                    <!--Hidden inputs for application-->
+                    <input type="hidden" id="geoJsonInput" name="GeoJson" asp-for="GeoJson" />
+                    <span asp-validation-for="GeoJson" class="text-danger"></span>
+                    <input type="hidden" id="municipalityInput" name="Municipality" asp-for="Municipality" />
+                    <input type="hidden" id="countyInput" name="County" asp-for="County" />
+                    <input type="hidden" id="mapLayerIdInput" name="MapLayerId" asp-for="MapLayerId" />
+
+                    <!--Title-->
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Tittel</label>
+                        <input type="text" class="form-control" name="Title" id="title" maxlength="50" minlength="5" required>
+                    </div>
+
+                    <!--Description-->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Beskrivelse av feil</label>
+                        <textarea id="description" name="Description" class="form-control" required></textarea>
+                    </div>
+
+                    <!-- Attachments -->
+                    <div id="attachments-container" class="mb-3">
+                        <label for="attachment" class="form-label">Last opp vedlegg</label>
+                        <input type="file" id="attachment" name="Attachments" class="form-control" />
+                    </div>
+                    <button type="button" id="add-attachment" class="btn btn-secondary btn-sm mb-3 attachment-button">Legg til vedlegg</button>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success submit-button">Send inn</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column with Map -->
+            <div class="col-md-8">
+
+                <div id="map" style="height: 600px;" class="shadow-sm rounded mb-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <link rel="stylesheet" href="~/css/AddFormStyleSheet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="@("https://unpkg.com/@turf/turf@7.0.0/turf.min.js")"></script>
+    <script src="~/js/realTimeTitlePreview.js"></script>
+    <script src="~/js/attachmentScript.js"></script>
+    <script src="~/js/addReportLeaflet.js"></script>
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\KartverketG16.props" />
+</Project>
